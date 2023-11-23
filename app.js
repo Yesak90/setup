@@ -73,11 +73,31 @@ const menu = [
   },
 ];
 
+const filterBtns = document.querySelectorAll(".filter-btn");
 const sectionCenter = document.querySelector(".section-center");
 
+// load items
 window.addEventListener("DOMContentLoaded", function () {
   // console.log('shake n bake');
   displayMenuItems(menu);
+});
+
+// filter items
+filterBtns.forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    const category = e.currentTarget.dataset.id;
+    const menuCategory = menu.filter(function (menuItem) {
+      if (menuItem.category === category) {
+        return menuItem;
+      }
+    });
+
+    if (category === "all") {
+      displayMenuItems(menu);
+    } else {
+      displayMenuItems(menuCategory);
+    }
+  });
 });
 
 function displayMenuItems(menuItems) {
